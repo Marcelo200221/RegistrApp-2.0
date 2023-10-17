@@ -1,0 +1,46 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Recuperar contraseña</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">cambioClave</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-item>
+    <ion-title>
+      Ingresa tu usuario
+    </ion-title>
+  </ion-item>
+  <ion-item>
+    <ion-card>
+      <ion-card-content>
+        <ion-input [(ngModel)]="Usuario" maxlength="6">Usuario</ion-input>
+      </ion-card-content>
+    </ion-card>
+  </ion-item>
+
+  <ion-item>
+    <ion-button  (click)="usuarioReconocido()">
+      Confirmar
+    </ion-button>
+  </ion-item>
+
+  <ion-item class="nuevaContra" [style.display]="isVisible ? 'block' : 'none'">
+    <ion-card >
+      <ion-card-content>
+        <ion-input [(ngModel)]="ClaveNueva" #nuevaContraseña type="password" maxlength="4">Nueva contraseña</ion-input>
+      </ion-card-content>
+    </ion-card>
+  </ion-item>
+
+  <ion-item [style.display]="isVisible ? 'block' : 'none'">
+    <ion-button (click)="cambiarContra()">
+      Cambiar
+    </ion-button>
+  </ion-item>
+</ion-content>
