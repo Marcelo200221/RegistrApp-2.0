@@ -12,6 +12,11 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
+    path: '**',
+    redirectTo: 'e404',
+    pathMatch: 'full'
+  },
+  {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   },
@@ -30,7 +35,8 @@ const routes: Routes = [
   {
     path: 'clase',
     loadChildren: () => import('./clase/clase.module').then( m => m.ClasePageModule)
-  },  {
+  },
+  {
     path: 'e404',
     loadChildren: () => import('./e404/e404.module').then( m => m.E404PageModule)
   },
