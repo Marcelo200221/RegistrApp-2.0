@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { ClasePageRoutingModule } from './clase-routing.module';
+import { GeolocalizacionComponent } from '../Componentes/geolocalizacion/geolocalizacion.component'; 
 
 import { ClasePage } from './clase.page';
 
@@ -15,6 +16,6 @@ import { ClasePage } from './clase.page';
     IonicModule,
     ClasePageRoutingModule
   ],
-  declarations: [ClasePage]
+  declarations: [ClasePage, GeolocalizacionComponent]
 })
 export class ClasePageModule {}
