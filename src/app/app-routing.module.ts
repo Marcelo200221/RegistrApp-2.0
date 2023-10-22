@@ -7,6 +7,31 @@ const routes: Routes = [
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
   {
+    path: 'selfie',
+    redirectTo: 'selfie',
+    pathMatch: 'full'
+  },
+  {
+    path: 'clase',
+    redirectTo: 'clase',
+    pathMatch: 'full'
+  },
+  {
+    path: 'register',
+    redirectTo: 'register',
+    pathMatch: 'full'
+  },
+  {
+    path: 'lector-qr',
+    redirectTo: 'lector-qr',
+    pathMatch: 'full'
+  },
+  {
+    path: 'login',
+    redirectTo: 'login',
+    pathMatch: 'full'
+  },
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
@@ -40,6 +65,11 @@ const routes: Routes = [
     path: 'e404',
     loadChildren: () => import('./e404/e404.module').then( m => m.E404PageModule)
   },
+  {
+    path: 'selfie',
+    loadChildren: () => import('./selfie/selfie.module').then( m => m.SelfiePageModule)
+  },
+
 
 ];
 

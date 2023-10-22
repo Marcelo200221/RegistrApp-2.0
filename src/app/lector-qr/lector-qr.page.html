@@ -13,7 +13,7 @@
 
   <ion-content class="qr">
     <div id="container" class="ion-padding">
-      <ion-button expand="full" (click)="openScanner()">Escanea el codigo de tu clase</ion-button>
+      <ion-button expand="full" (click)="scanQRCode()">Escanea el codigo de tu clase</ion-button>
       <div id="videoContainer" [ngClass]="{ 'hide-result': isScanning }">
         <video #videoElement autoplay="true"></video>
       </div>

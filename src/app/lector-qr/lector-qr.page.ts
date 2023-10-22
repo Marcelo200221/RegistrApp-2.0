@@ -1,7 +1,12 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
-import { BrowserMultiFormatReader, Result, BarcodeFormat } from '@zxing/library';
+
+import {Camera,CameraDirection,CameraResultType, CameraSource } from '@capacitor/camera';
+import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
+
+
+
 
 @Component({
   selector: 'app-lector-qr',
@@ -10,13 +15,13 @@ import { BrowserMultiFormatReader, Result, BarcodeFormat } from '@zxing/library'
 })
 export class LectorQRPage implements OnInit {
   qrResult: string = ''; 
-  codeReader!: BrowserMultiFormatReader;
+  
   isScanning: boolean = false;
   nombre: string = ""
 
   @ViewChild('videoElement', { static: true }) videoElement: ElementRef | undefined;
   constructor(private route: ActivatedRoute, private navCtrl: NavController) { 
-    this.codeReader = new BrowserMultiFormatReader();
+    
     this.route.queryParams.subscribe(params => {
       this.nombre = params['username'];
     }) 
@@ -27,38 +32,34 @@ export class LectorQRPage implements OnInit {
     console.log(this.nombre);
   }
 
-  openScanner() {
-    if (this.videoElement) {
-      const hints = new Map<BarcodeFormat, any>();
-      hints.set(BarcodeFormat.QR_CODE, {});
+  async takePicture() {
+    const image = await Camera.getPhoto({
+      quality: 100,
+      allowEditing: true,
+      resultType: CameraResultType.Uri,
+      direction: CameraDirection.Front, // Esto selecciona la cámara frontal
+    });
+  
+    // La imagen se ha capturado exitosamente y puedes hacer algo con ella aquí
+    console.log('Imagen capturada:', image.webPath);
+  }
 
-      this.codeReader
-        .decodeFromInputVideoDevice(undefined, this.videoElement.nativeElement)
-        .then((result: Result) => {
-          this.qrResult = result.getText(); 
-
-          const datosEscaneados = this.qrResult.split(',');
-
-          localStorage.setItem('Profesor', JSON.stringify(datosEscaneados));
-
-          this.closeScanner();
-
-          this.navCtrl.navigateForward('/clase');
-
-          this.isScanning = false; 
-        })
-        .catch((error: any) => {
-          console.error(error);
-          this.isScanning = false; 
-        });
-
-      this.isScanning = true; 
+  async scanQRCode() {
+    const result = await BarcodeScanner.startScan();
+    if (result.hasContent) {
+      console.log('Contenido del código QR:', result.content);
+      this.qrResult = result.content; 
+      const datosEscaneados = this.qrResult.split(',');
+      localStorage.setItem('Profesor', JSON.stringify(datosEscaneados));
+      
+      this.navCtrl.navigateForward('/clase');
+      this.takePicture();
+      
+    } else {
+      // No se detectó ningún código QR
+      console.log('No se detectó ningún código QR');
     }
   }
 
-  closeScanner() {
-    
-    this.codeReader.reset();
-    this.qrResult = ''; 
-  }
+  
 }
