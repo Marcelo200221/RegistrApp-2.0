@@ -216,4 +216,8 @@ export class LoginPage implements OnInit {
     this.navCtrl.navigateForward('/cambio-clave')
   }
 
+  irSelfie(){
+    this.navCtrl.navigateForward('/selfie')
+  }
+
 }
