@@ -22,6 +22,7 @@ export class SelfiePage implements OnInit {
       resultType: CameraResultType.Uri,
       direction: CameraDirection.Front,
     });
+    
     console.log(image);
     this.cameraImage = image.webPath; // Asigna la ruta de la imagen para mostrarla en la vista.
   }

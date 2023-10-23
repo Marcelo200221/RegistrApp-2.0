@@ -21,6 +21,7 @@ export class LectorQRPage implements OnInit {
   isScanning: boolean = false;
   nombre: string = ""
   isVisible: boolean=true;
+  
 
   @ViewChild('videoElement', { static: true }) videoElement: ElementRef | undefined;
   constructor(private storage: StorageService,private route: ActivatedRoute, private navCtrl: NavController) { 
@@ -35,25 +36,7 @@ export class LectorQRPage implements OnInit {
     console.log(this.nombre);
   }
 
-  async takePicture() {
-    const image = await Camera.getPhoto({
-      quality: 100,
-      allowEditing: true,
-      resultType: CameraResultType.Uri,
-      direction: CameraDirection.Front, // Esto selecciona la cámara frontal
-    });
-    this.cameraImage = image.webPath;
-
-    this.navCtrl.navigateForward('/clase', {
-      queryParams:{
-        photo: this.cameraImage
-      }
-    })
   
-    // La imagen se ha capturado exitosamente y puedes hacer algo con ella aquí
-    console.log('Imagen capturada:', image.webPath);
-    this.navCtrl.navigateForward('/clase');
-  }
 
   segmentChanged(event: any) {
     // Detecta cuándo cambia el segmento y actualiza el valor de activeSegment
@@ -67,6 +50,7 @@ export class LectorQRPage implements OnInit {
       this.qrResult = result.content; 
       const datosEscaneados = this.qrResult.split(',');
       this.storage.setvalue('Profesor', datosEscaneados);
+      this.navCtrl.navigateForward('/clase');
       if(datosEscaneados){
         this.isVisible = true;
       }

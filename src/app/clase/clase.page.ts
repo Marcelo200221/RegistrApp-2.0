@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular
 import { ActivatedRoute } from '@angular/router';
 import type { Animation } from '@ionic/angular';
 import { AnimationController, IonCard } from '@ionic/angular';
+import {Camera,CameraDirection,CameraResultType, CameraSource } from '@capacitor/camera';
 
 @Component({
   selector: 'app-clase',
@@ -29,6 +30,10 @@ export class ClasePage implements OnInit {
   dia: string=""
   foto: any;
 
+  isVisible: boolean=true;
+
+  cameraImage: any;
+
   private animation!: Animation;
 
   
@@ -38,6 +43,7 @@ export class ClasePage implements OnInit {
     const fecha = new Date(timestamp);
 
     this.formatedtime = fecha.toLocaleDateString();
+    this.isVisible = false;
 
     this.route.queryParams.subscribe(params => {
       this.foto = params['photo'];
@@ -45,6 +51,8 @@ export class ClasePage implements OnInit {
   }
 
   ngOnInit() {
+        console.log(this.foto);
+        
         let registroProfe = localStorage.getItem('Profesor');
         let registroRecup = localStorage.getItem('Nuevo usuario');
 
@@ -88,6 +96,25 @@ export class ClasePage implements OnInit {
           }
         }
     
+  }
+
+  async takePicture() {
+    const image = await Camera.getPhoto({
+      quality: 100,
+      allowEditing: true,
+      resultType: CameraResultType.Uri,
+      source: CameraSource.Camera, 
+    });
+    this.cameraImage = image.webPath;
+    image.dataUrl = this.cameraImage;
+    if(this.cameraImage){
+      this.isVisible = true;
+    }
+
+   
+  
+    // La imagen se ha capturado exitosamente y puedes hacer algo con ella aquí
+    console.log('Imagen capturada:', image.dataUrl);
   }
 
   ngAfterViewInit() {

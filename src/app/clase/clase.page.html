@@ -14,27 +14,38 @@
   <ion-item>
     <ion-card>
       <ion-card-content>
-        <ion-title>Datos Profesor</ion-title>
-        <ion-label>{{Profe}}</ion-label>
-        <ion-label>{{hora}}</ion-label>
-        <ion-label>{{sala}}</ion-label>
-        <ion-label>{{dia}}</ion-label>
+        <ion-img [src]="cameraImage" *ngIf="cameraImage"></ion-img>
+        <ion-button expand="full" (click)="takePicture()">Abrir cámara</ion-button>
       </ion-card-content>
     </ion-card>
   </ion-item>
+  <div  [style.display]="isVisible ? 'block' : 'none'">
+    <ion-item>
+      <ion-card>
+        <ion-card-content>
+          <ion-title>Datos Profesor</ion-title>
+          <ion-label>{{Profe}}</ion-label>
+          <ion-label>{{hora}}</ion-label>
+          <ion-label>{{sala}}</ion-label>
+          <ion-label>{{dia}}</ion-label>
+        </ion-card-content>
+      </ion-card>
+    </ion-item>
 
-  <ion-item>
-    <ion-card>
-      <ion-card-content>
-        <ion-title>Datos Alumnos </ion-title>
-        <ion-label>Nombre: {{nombre}}</ion-label>
-        <ion-label>Apellido: {{apellido}}</ion-label>
-        <ion-label>Rut: {{rut}}</ion-label>
-        <strong>Timestamp: {{formatedtime}}</strong>
-        <app-geolocalizacion></app-geolocalizacion>
-      </ion-card-content>
-    </ion-card>
-  </ion-item>
+    <ion-item>
+      <ion-card>
+        <ion-card-content>
+          <ion-title>Datos Alumnos </ion-title>
+          <ion-label>Foto: {{foto}}</ion-label>
+          <ion-label>Nombre: {{nombre}}</ion-label>
+          <ion-label>Apellido: {{apellido}}</ion-label>
+          <ion-label>Rut: {{rut}}</ion-label>
+          <strong>Timestamp: {{formatedtime}}</strong>
+          <app-geolocalizacion></app-geolocalizacion>
+        </ion-card-content>
+      </ion-card>
+    </ion-item>
+  </div>
 
   
 
