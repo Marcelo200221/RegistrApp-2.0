@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AlertController, NavController } from '@ionic/angular';
+import { DatosRegionComunaService } from 'src/app/Servicios/datos-region-comuna.service';
 import { StorageService } from '../Servicios/storage.service';
 
 @Component({
@@ -9,7 +10,11 @@ import { StorageService } from '../Servicios/storage.service';
 })
 export class RegisterPage implements OnInit {
 
-  
+
+  // Utilizamos @Input para recibir datos
+  @Input() regionSeleccionada!: string;
+  @Input() comunaSeleccionada!: string;
+
   nombre: string=""
   nombreValido: boolean=true;
   apellido: string=""
@@ -20,10 +25,11 @@ export class RegisterPage implements OnInit {
   carreraValida: boolean=true;
   usuario: string=""
   clave: string=""
-  constructor(private storage: StorageService,private navctrl: NavController, private alertController: AlertController) { }
+  constructor(private storage: StorageService,private navctrl: NavController, private alertController: AlertController) {}
 
   ngOnInit() {
   }
+
 
   registroValido(){
     if(this.nombre.length<3){
@@ -55,9 +61,9 @@ export class RegisterPage implements OnInit {
       })
       await alert.present();
       registro.push(this.nombre, this.apellido, this.rut, this.carrera, this.usuario, this.clave)
-      const usuario = {nombre: this.nombre + ' ' + this.apellido, Rut: this.rut, Carrera: this.carrera, Nombre_Usuario: this.usuario, Clave: this.clave } 
+      const usuario = {nombre: this.nombre + ' ' + this.apellido, Rut: this.rut, Carrera: this.carrera, Nombre_Usuario: this.usuario, Clave: this.clave, Region: this.regionSeleccionada, Comuna: this.comunaSeleccionada } 
       let registroJSON = JSON.stringify(registro);
-      this.storage.Setvalue('Nuevo usuario', usuario);
+      this.storage.setvalue('Nuevo usuario', usuario);
       localStorage.setItem('Nuevo usuario', registroJSON);
 
       const actualizacionEvento = new Event('datosActualizados');
@@ -65,6 +71,15 @@ export class RegisterPage implements OnInit {
 
       this.navctrl.navigateForward('/login')
     }
+  }
+
+  recibirRegionSeleccionada(region: any) {
+    this.regionSeleccionada = region;
+  }
+
+  // Evento para recibir la comuna seleccionada del componente app-region-comuna
+  recibirComunaSeleccionada(comuna: any) {
+    this.comunaSeleccionada = comuna;
   }
 
 

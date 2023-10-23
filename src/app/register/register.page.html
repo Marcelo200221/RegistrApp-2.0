@@ -55,6 +55,10 @@
     </ion-card>
     <ion-label class="error_mensaje" [class.visible]="carreraValida">El nombre debe poseer 3 digitos como minimo</ion-label>
   </ion-item>
+  <app-region-comuna 
+  (regionSeleccionada1)="regionSeleccionada = $event"
+  (comunaSeleccionada1)="comunaSeleccionada = $event"
+  ></app-region-comuna>
   <ion-item>
     <ion-button (click)="registrar()">Registrar</ion-button>
   </ion-item>

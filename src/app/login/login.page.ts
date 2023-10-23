@@ -178,7 +178,7 @@ export class LoginPage implements OnInit {
         await alert.present();
       }else{
         const usuario_actual = {Usuario: this.registroRecupParseado[4], Contraseña: this.registroRecupParseado[5]}
-        this.storage.Setvalue('Sesion de usuario', usuario_actual);
+        this.storage.setvalue('Sesion de usuario', usuario_actual);
         this.navCtrl.navigateForward('/lector-qr', {
           queryParams:{
             username: this.nombre

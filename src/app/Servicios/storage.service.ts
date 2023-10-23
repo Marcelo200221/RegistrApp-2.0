@@ -10,15 +10,31 @@ export class StorageService {
     this.storage.create();
   }
 
-  async Setvalue(key: string, value: any){
+  async setvalue(key: string, value: any){
     const guardado = await this.storage.set(key, value);
     console.log(guardado);
     
   }
 
-  async Getvalue(key: string){
-    const recuperado = await this.storage.get(key);
-    console.log(recuperado);
+  async getvalue(key: string){
+    return await this.storage.get(key);
     
   };
+
+  async pushValue(key: string,nuevoValor: any){
+    let valorExistente = await this.getvalue(key);
+    if(valorExistente){
+      if (Array.isArray(valorExistente)) {
+        valorExistente.push(nuevoValor);
+      } else {
+        // Si no es un array, crea un nuevo array con el valor existente y el nuevo valor
+        valorExistente = [valorExistente, nuevoValor];
+      }
+    } else {
+      // Si no existe un valor, crea un nuevo array con el nuevo valor
+      valorExistente = [nuevoValor];
+    }
+
+    await this.storage.set(key, valorExistente);
+  }
 }

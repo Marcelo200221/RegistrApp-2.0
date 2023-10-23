@@ -1,0 +1,21 @@
+<ion-item>
+  <ion-label>Region de residencia</ion-label>
+  <ion-card>
+    <ion-card-content>
+      <ion-select (ionChange)="seleccionarRegion($event)" [(ngModel)]="regionSeleccionada">
+        <ion-select-option *ngFor="let region of regiones" [value]="region.id">{{region.nombre}}</ion-select-option>
+      </ion-select>
+    </ion-card-content>
+  </ion-card>
+</ion-item>
+
+<ion-item [style.display]="isVisible ? 'block' : 'none'">
+  <ion-label>Comuna de residencia</ion-label>
+  <ion-card>
+    <ion-card-content>
+      <ion-select (ionChange)="seleccionarComuna($event)" [(ngModel)]="comunaSeleccionada">
+        <ion-select-option *ngFor="let comuna of comunas" [value]="comuna.nombre">{{comuna.nombre}}</ion-select-option>
+      </ion-select>
+    </ion-card-content>
+  </ion-card>
+</ion-item>

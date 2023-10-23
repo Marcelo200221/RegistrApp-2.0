@@ -4,6 +4,10 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
+import { RegionComunaComponent } from '../Componentes/region-comuna/region-comuna.component';
+
+
+
 import { RegisterPageRoutingModule } from './register-routing.module';
 
 import { RegisterPage } from './register.page';
@@ -16,6 +20,6 @@ import { StorageService } from '../Servicios/storage.service';
     IonicModule,
     RegisterPageRoutingModule
   ],
-  declarations: [RegisterPage]
+  declarations: [RegisterPage, RegionComunaComponent]
 })
 export class RegisterPageModule {}
