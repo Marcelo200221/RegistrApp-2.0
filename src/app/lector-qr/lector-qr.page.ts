@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { NavController } from '@ionic/angular';
-
+import { IonCard, IonInput, NavController } from '@ionic/angular';
+import { StorageService } from '../Servicios/storage.service';
 import {Camera,CameraDirection,CameraResultType, CameraSource } from '@capacitor/camera';
 import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
 
@@ -14,14 +14,17 @@ import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
   styleUrls: ['./lector-qr.page.scss'],
 })
 export class LectorQRPage implements OnInit {
+  @ViewChild('verVista', { static: false }) verVista!: IonCard;
   qrResult: string = ''; 
-  
+  cameraImage: any;
+  selectedTab: string='';
   isScanning: boolean = false;
   nombre: string = ""
+  isVisible: boolean=true;
 
   @ViewChild('videoElement', { static: true }) videoElement: ElementRef | undefined;
-  constructor(private route: ActivatedRoute, private navCtrl: NavController) { 
-    
+  constructor(private storage: StorageService,private route: ActivatedRoute, private navCtrl: NavController) { 
+    this.isVisible = false;
     this.route.queryParams.subscribe(params => {
       this.nombre = params['username'];
     }) 
@@ -39,9 +42,22 @@ export class LectorQRPage implements OnInit {
       resultType: CameraResultType.Uri,
       direction: CameraDirection.Front, // Esto selecciona la cámara frontal
     });
+    this.cameraImage = image.webPath;
+
+    this.navCtrl.navigateForward('/clase', {
+      queryParams:{
+        photo: this.cameraImage
+      }
+    })
   
     // La imagen se ha capturado exitosamente y puedes hacer algo con ella aquí
     console.log('Imagen capturada:', image.webPath);
+    this.navCtrl.navigateForward('/clase');
+  }
+
+  segmentChanged(event: any) {
+    // Detecta cuándo cambia el segmento y actualiza el valor de activeSegment
+    this.selectedTab = event.detail.value;
   }
 
   async scanQRCode() {
@@ -50,10 +66,12 @@ export class LectorQRPage implements OnInit {
       console.log('Contenido del código QR:', result.content);
       this.qrResult = result.content; 
       const datosEscaneados = this.qrResult.split(',');
-      localStorage.setItem('Profesor', JSON.stringify(datosEscaneados));
+      this.storage.setvalue('Profesor', datosEscaneados);
+      if(datosEscaneados){
+        this.isVisible = true;
+      }
       
-      this.navCtrl.navigateForward('/clase');
-      this.takePicture();
+      
       
     } else {
       // No se detectó ningún código QR

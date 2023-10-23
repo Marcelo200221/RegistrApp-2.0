@@ -11,12 +11,32 @@
     </ion-toolbar>
   </ion-header>
 
+
+
   <ion-content class="qr">
-    <div id="container" class="ion-padding">
-      <ion-button expand="full" (click)="scanQRCode()">Escanea el codigo de tu clase</ion-button>
-      <div id="videoContainer" [ngClass]="{ 'hide-result': isScanning }">
-        <video #videoElement autoplay="true"></video>
+    <ion-segment (ionChange)="segmentChanged($event)" value="default" [(ngModel)]="selectedTab">
+      <ion-segment-button value="lectorQr">
+        <ion-label>Lector QR</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="selfie">
+        <ion-label>Selfie</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+    <div *ngIf="selectedTab == 'lectorQr'">
+      <div id="container" class="ion-padding">
+        <ion-button expand="full" (click)="scanQRCode()">Escanea el codigo de tu clase</ion-button>
+        <div id="videoContainer" [ngClass]="{ 'hide-result': isScanning }">
+          <video #videoElement autoplay="true"></video>
+        </div>
       </div>
+    </div>
+    <div [style.display]="isVisible ? 'block' : 'none'" *ngIf="selectedTab == 'selfie'">
+      <ion-card>
+        <ion-card-content>
+          <ion-img [src]="cameraImage" *ngIf="cameraImage"></ion-img>
+          <ion-button expand="full" (click)="takePicture()">Abrir cámara</ion-button>
+         </ion-card-content>
+      </ion-card>
     </div>
   </ion-content>
 </ion-content>

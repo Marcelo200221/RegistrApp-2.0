@@ -7,6 +7,11 @@ const routes: Routes = [
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
   {
+    path: 'cambio-clave',
+    redirectTo: 'cambio-clave',
+    pathMatch: 'full'
+  },
+  {
     path: 'selfie',
     redirectTo: 'selfie',
     pathMatch: 'full'

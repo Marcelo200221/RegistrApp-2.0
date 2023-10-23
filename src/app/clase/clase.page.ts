@@ -27,6 +27,7 @@ export class ClasePage implements OnInit {
   hora: string=""
   sala: string=""
   dia: string=""
+  foto: any;
 
   private animation!: Animation;
 
@@ -37,6 +38,10 @@ export class ClasePage implements OnInit {
     const fecha = new Date(timestamp);
 
     this.formatedtime = fecha.toLocaleDateString();
+
+    this.route.queryParams.subscribe(params => {
+      this.foto = params['photo'];
+    }) 
   }
 
   ngOnInit() {
