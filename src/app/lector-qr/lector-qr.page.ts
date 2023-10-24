@@ -42,10 +42,8 @@ export class LectorQRPage implements OnInit {
 
     const datosConfUsuario = await this.storage.getvalue('Nuevo usuario');
     const datosUsuario = await this.storage.getvalue('Sesion de usuario');
-    const usuarioConf = {username: datosConfUsuario.Nombre_Usuario, clave: datosConfUsuario.Clave};
 
     console.log(datosUsuario);
-    console.log(usuarioConf);
     
 
     if(datosUsuario && (datosUsuario.Usuario == datosConfUsuario.Nombre_Usuario && datosUsuario.Contraseña == datosConfUsuario.Clave)){
@@ -77,6 +75,10 @@ export class LectorQRPage implements OnInit {
       console.error("No se pudo iniciar el escaner", error);
       
     }
+  }
+  
+  volver(){
+    this.navCtrl.navigateBack('/login');
   }
 
   

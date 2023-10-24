@@ -32,6 +32,7 @@ export class ClasePage implements OnInit {
   dia: string=""
 
   isVisible: boolean=true;
+  isVisible2: boolean=true;
 
   cameraImage: any;
 
@@ -115,6 +116,7 @@ export class ClasePage implements OnInit {
     image.dataUrl = this.cameraImage;
     if(this.cameraImage){
       this.isVisible = true;
+      this.isVisible2 = false;
     }
 
    
@@ -155,6 +157,10 @@ export class ClasePage implements OnInit {
 
   ionViewDidEnter(){
     this.play()
+  }
+
+  volver(){
+    this.navCtrl.navigateBack('/home');
   }
 
 

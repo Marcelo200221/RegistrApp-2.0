@@ -254,5 +254,9 @@ export class LoginPage implements OnInit {
     this.navCtrl.navigateForward('/cambio-clave')
   }
 
+  volver(){
+    this.navCtrl.navigateBack('/home');
+  }
+
 
 }

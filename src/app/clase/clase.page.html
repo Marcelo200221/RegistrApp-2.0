@@ -10,12 +10,14 @@
       <ion-title size="large">Su clase está registrada</ion-title>
     </ion-toolbar>
   </ion-header>
-
+  <ion-item>
+    <ion-button (click)="volver()">Volver</ion-button>
+  </ion-item>
   <ion-item>
     <ion-card>
       <ion-card-content>
         <ion-img [src]="cameraImage" *ngIf="cameraImage"></ion-img>
-        <ion-button expand="full" (click)="takePicture()">Abrir cámara</ion-button>
+        <ion-button [style.display]="isVisible2 ? 'block' : 'none'" expand="full" (click)="takePicture()">Abrir cámara</ion-button>
       </ion-card-content>
     </ion-card>
   </ion-item>
