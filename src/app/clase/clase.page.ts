@@ -1,8 +1,9 @@
 import { Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import type { Animation } from '@ionic/angular';
-import { AnimationController, IonCard } from '@ionic/angular';
+import type { Animation} from '@ionic/angular';
+import { AnimationController, IonCard , NavController } from '@ionic/angular';
 import {Camera,CameraDirection,CameraResultType, CameraSource } from '@capacitor/camera';
+import { StorageService } from '../Servicios/storage.service';
 
 @Component({
   selector: 'app-clase',
@@ -13,7 +14,8 @@ export class ClasePage implements OnInit {
   @ViewChildren(IonCard, { read: ElementRef }) cardElements!: QueryList<ElementRef<HTMLIonCardElement>>;
 
 
-  
+  loggedInUser: { username: string; password: string} | null = null;
+  registerUser: { nombre: string; rut: string; carrera: string; username: string; clave: string; region: string; comuna: string} | null = null;
 
   registroRecupParseado: any;
   registroProfeParseado: any;
@@ -28,7 +30,6 @@ export class ClasePage implements OnInit {
   hora: string=""
   sala: string=""
   dia: string=""
-  foto: any;
 
   isVisible: boolean=true;
 
@@ -38,20 +39,25 @@ export class ClasePage implements OnInit {
 
   
 
-  constructor(private route: ActivatedRoute, private animationCtrl: AnimationController) {
+  constructor(private storage: StorageService ,private route: ActivatedRoute, private animationCtrl: AnimationController, private navCtrl: NavController) {
     const timestamp = Date.now();
     const fecha = new Date(timestamp);
 
     this.formatedtime = fecha.toLocaleDateString();
     this.isVisible = false;
-
-    this.route.queryParams.subscribe(params => {
-      this.foto = params['photo'];
-    }) 
   }
 
-  ngOnInit() {
-        console.log(this.foto);
+  async ngOnInit() {
+        await this.storage.getvalue('Nuevo usuario');
+        await this.storage.getvalue('Sesion de usuario');
+        const datosUsuario = await this.storage.getvalue('Sesion de usuario');
+        const datosConfUsuario = await this.storage.getvalue('Nuevo usuario');
+
+        if(datosUsuario && (datosUsuario.Usuario == datosConfUsuario.Nombre_Usuario && datosUsuario.Contraseña == datosConfUsuario.Clave)){
+          this.loggedInUser = datosUsuario
+        }else{
+          this.navCtrl.navigateForward('/daccess');
+        }
         
         let registroProfe = localStorage.getItem('Profesor');
         let registroRecup = localStorage.getItem('Nuevo usuario');

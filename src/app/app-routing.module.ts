@@ -7,13 +7,13 @@ const routes: Routes = [
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
   {
-    path: 'cambio-clave',
-    redirectTo: 'cambio-clave',
+    path: 'daccess',
+    redirectTo: 'daccess',
     pathMatch: 'full'
   },
   {
-    path: 'selfie',
-    redirectTo: 'selfie',
+    path: 'cambio-clave',
+    redirectTo: 'cambio-clave',
     pathMatch: 'full'
   },
   {
@@ -71,9 +71,10 @@ const routes: Routes = [
     loadChildren: () => import('./e404/e404.module').then( m => m.E404PageModule)
   },
   {
-    path: 'selfie',
-    loadChildren: () => import('./selfie/selfie.module').then( m => m.SelfiePageModule)
+    path: 'daccess',
+    loadChildren: () => import('./daccess/daccess.module').then( m => m.DaccessPageModule)
   },
+
 
 
 ];

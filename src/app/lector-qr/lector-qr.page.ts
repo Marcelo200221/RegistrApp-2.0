@@ -15,6 +15,8 @@ import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
 })
 export class LectorQRPage implements OnInit {
   @ViewChild('verVista', { static: false }) verVista!: IonCard;
+  loggedInUser: { username: string; password: string} | null = null;
+  registerUser: { nombre: string; rut: string; carrera: string; username: string; clave: string; region: string; comuna: string} | null = null;
   qrResult: string = ''; 
   cameraImage: any;
   selectedTab: string='';
@@ -32,9 +34,28 @@ export class LectorQRPage implements OnInit {
     
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    await this.storage.getvalue('Sesion de usuario');
+    await this.storage.getvalue('Nuevo usuario');
+    
     console.log(this.nombre);
+
+    const datosConfUsuario = await this.storage.getvalue('Nuevo usuario');
+    const datosUsuario = await this.storage.getvalue('Sesion de usuario');
+    const usuarioConf = {username: datosConfUsuario.Nombre_Usuario, clave: datosConfUsuario.Clave};
+
+    console.log(datosUsuario);
+    console.log(usuarioConf);
+    
+
+    if(datosUsuario && (datosUsuario.Usuario == datosConfUsuario.Nombre_Usuario && datosUsuario.Contraseña == datosConfUsuario.Clave)){
+      this.loggedInUser = datosUsuario
+    }else{
+      this.navCtrl.navigateForward('/daccess');
+    }
   }
+
+  
 
   
   async scanQRCode() {

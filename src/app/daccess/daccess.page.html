@@ -1,24 +1,21 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>selfie</ion-title>
+    <ion-title>Acceso denegado</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">selfie</ion-title>
+      <ion-title size="large">Acceso denegado</ion-title>
     </ion-toolbar>
   </ion-header>
-
   <ion-content>
     <ion-card>
       <ion-card-content>
-        <ion-img [src]="cameraImage" *ngIf="cameraImage"></ion-img>
-        <ion-button expand="full" (click)="openCamera()">Abrir cámara</ion-button>
+        <ion-label>UPS!!, no deberías estar aquí...</ion-label>
       </ion-card-content>
     </ion-card>
+    <ion-button (click)="volverLogin()" expand="block">Volver</ion-button>
   </ion-content>
 </ion-content>
-
-

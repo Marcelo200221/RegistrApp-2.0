@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { SelfiePageRoutingModule } from './selfie-routing.module';
+import { DaccessPageRoutingModule } from './daccess-routing.module';
 
-import { SelfiePage } from './selfie.page';
+import { DaccessPage } from './daccess.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    SelfiePageRoutingModule
+    DaccessPageRoutingModule
   ],
-  declarations: [SelfiePage]
+  declarations: [DaccessPage]
 })
-export class SelfiePageModule {}
+export class DaccessPageModule {}

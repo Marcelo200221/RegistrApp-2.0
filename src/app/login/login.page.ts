@@ -12,6 +12,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class LoginPage implements OnInit {
   @ViewChildren(IonCard, { read: ElementRef }) cardElements!: QueryList<ElementRef<HTMLIonCardElement>>;
 
+  loggedInUser: { username: string; password: string} | null = null;
+  registerUser: { nombre: string; rut: string; carrera: string; username: string; clave: string; region: string; comuna: string} | null = null;
+
   private animation!: Animation;
   private animation2!: Animation;
   private animationExito!: Animation;
@@ -31,7 +34,42 @@ export class LoginPage implements OnInit {
 
   
 
-  ngOnInit() {
+  async ngOnInit() {
+      await this.storage.getvalue('Nuevo usuario');
+      await this.storage.getvalue('Sesion de usuario');
+
+      const datosUsuario = await this.storage.getvalue('Sesion de usuario');
+      const datosConfUsuario = await this.storage.getvalue('Nuevo usuario');
+      const usuarioConf = {username: datosConfUsuario.Nombre_Usuario, clave: datosConfUsuario.Clave}
+      console.log(datosConfUsuario);
+      console.log(datosConfUsuario.Nombre_Usuario);
+      
+      
+      console.log(usuarioConf);
+      
+
+      if(datosUsuario && (datosUsuario.Usuario == datosConfUsuario.Nombre_Usuario && datosUsuario.Contraseña == datosConfUsuario.Clave)){
+        this.loggedInUser = datosUsuario
+        const alert = await this.alertController.create({
+          header: "Cuenta activa",
+          message: "Se ha encontrado una cuenta iniciada, deseas continuar con esta cuenta?",
+          buttons: [{
+            text: "Si",
+            handler: () => {
+              this.navCtrl.navigateForward('/lector-qr')
+            },
+  
+          },{
+            text: 'No',
+            role: 'cancel',
+            handler: () =>{
+              this.navCtrl.navigateBack('/register')
+              
+            }
+          }]
+        })
+        await alert.present();
+      }
     
       let registroRecup = localStorage.getItem('Nuevo usuario');
 
@@ -216,8 +254,5 @@ export class LoginPage implements OnInit {
     this.navCtrl.navigateForward('/cambio-clave')
   }
 
-  irSelfie(){
-    this.navCtrl.navigateForward('/selfie')
-  }
 
 }
