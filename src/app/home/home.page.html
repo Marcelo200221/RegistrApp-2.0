@@ -1,24 +1,24 @@
+
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-title class="saludo">Bienvenido a RegistrApp</ion-title>
   </ion-toolbar>
 </ion-header>
+  <ion-content [fullscreen]="true">
+    <ion-header collapse="condense">
+      <ion-toolbar>
+        <ion-title size="large">Blank</ion-title>
+      </ion-toolbar>
+    </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+    <div class="bienvenida">
+      <h5 class="descripcion">Aquí puedes registrar tu asistencia para tus clases</h5>
+    </div>
 
-  <div id="container">
-    <strong>¡¡Bienvenido alumno!!</strong>
-    <br>
-    <label for="">Inicia tus clases aquí</label>
-    <br>
-    <ion-button (click)="irLogin()" color="danger">Iniciar sesion</ion-button>
-  </div>
-  
-</ion-content>
+    <div id="container">
+      <ion-button [routerLink]="['/login']" color="danger">Iniciar sesion</ion-button>
+      <ion-button [routerLink]="['/register']" >Registrarse</ion-button>
+    </div>
+    
+  </ion-content>
+

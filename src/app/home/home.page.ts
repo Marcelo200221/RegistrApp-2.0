@@ -10,8 +10,5 @@ export class HomePage {
 
   constructor(private navCtrl: NavController) {}
 
-  irLogin(){
-    this.navCtrl.navigateForward('/login')
-  }
 
 }
