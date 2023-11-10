@@ -13,3 +13,35 @@
 #clave{
     color: black;
 }
+
+.custom-background{
+    --ion-background-color: #80DAEB;
+}
+
+.top{
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    border-style: solid ;
+    border-color: aliceblue;
+    background-color: #80DAEB;
+    .volver {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start; /* Alinea los elementos a la izquierda */
+        margin-top: 5px; 
+
+        ion-button{
+            width: auto;
+        }
+    }
+
+    .inicio{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 10px;
+        color:black;
+    }
+
+}
