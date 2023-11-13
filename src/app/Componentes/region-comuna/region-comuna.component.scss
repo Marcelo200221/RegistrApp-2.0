@@ -1,0 +1,24 @@
+.Cont{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .region{
+        background-color: #fff;
+        width: 30vh;
+    }
+
+    .comuna{
+        background-color: #fff;
+    }
+
+    .titulo1{
+        color: #000;
+    }
+
+    .titulo2{
+        color: #000;
+    }
+
+}

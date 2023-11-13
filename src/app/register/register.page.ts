@@ -82,5 +82,9 @@ export class RegisterPage implements OnInit {
     this.comunaSeleccionada = comuna;
   }
 
+  volver(){
+    this.navctrl.navigateBack('/home');
+  }
+
 
 }

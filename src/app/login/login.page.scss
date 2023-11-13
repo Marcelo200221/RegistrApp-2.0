@@ -45,3 +45,74 @@
     }
 
 }
+
+.datos{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center ;
+    align-items: center;
+
+    .user{
+        width: 50vh;
+        background-color: #80DAEB;
+
+        .card1{
+            background-color: #fff;
+        }
+
+        #nombre{
+            color: #000;
+            
+        }
+    }
+
+    .clave{
+        width: 50vh;
+
+        .card2{
+            background-color: #fff;
+        }
+
+        #clave{
+            color: #000;
+        }
+    }
+}
+
+.opciones{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+
+    .opcional:hover{
+        transition: .3s ease;
+        color: red;
+    }
+
+    .opcional{
+        transition: .3s ease;
+    }
+
+}
+
+.recuperar_clave{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+
+    .opcional2:hover{
+        transition: .3s ease;
+        color: red;
+    }
+    
+    .opcional2{
+        transition: .3s ease;
+    }
+
+}
+
