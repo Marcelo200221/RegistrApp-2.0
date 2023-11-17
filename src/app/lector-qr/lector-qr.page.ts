@@ -58,19 +58,22 @@ export class LectorQRPage implements OnInit {
   
   async scanQRCode() {
     try {
-      await BarcodeScanner.checkPermission()
-      const result = await BarcodeScanner.startScan();
-      if (result.hasContent) {
-        console.log('Contenido del código QR:', result.content);
-        BarcodeScanner.stopScan();
-        this.qrResult = result.content; 
-        const datosEscaneados = this.qrResult.split(',');
-        this.storage.setvalue('Profesor', datosEscaneados);
-        this.navCtrl.navigateForward('/clase');
-      } else {
-        // No se detectó ningún código QR
-        console.log('No se detectó ningún código QR');
-      }
+      this.isScanning = true;
+      
+        const result = await BarcodeScanner.startScan();
+        if (result.hasContent) {
+          console.log('Contenido del código QR:', result.content);
+          BarcodeScanner.stopScan();
+          this.qrResult = result.content; 
+          const datosEscaneados = this.qrResult.split(',');
+          this.storage.setvalue('Profesor', datosEscaneados);
+          this.navCtrl.navigateForward('/clase');
+        } else {
+          // No se detectó ningún código QR
+          console.log('No se detectó ningún código QR');
+        }
+      
+      
     }catch (error){
       console.error("No se pudo iniciar el escaner", error);
       

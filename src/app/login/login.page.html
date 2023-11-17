@@ -4,42 +4,47 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content class="ion-padding custom-background" [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">Login</ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-item>
+
+  <div class="volver">
     <ion-button (click)="volver()">Volver</ion-button>
-  </ion-item>
-  <ion-item>
-    <ion-title>
-      Inicio de sesion
-    </ion-title>
-  </ion-item>
+  </div>
+  <div class="top">
+    <div class="inicio">
+      <ion-title>
+        Inicio de sesion
+      </ion-title>
+    </div>
+  </div>
   <br>
-  <ion-item lines="full">
-    <ion-card>
-      <ion-card-content>
-        <ion-input id="nombre" (input)="play2()" [(ngModel)]="nombre" minlength="6" maxlength="6">Usuario:</ion-input>
-        <ion-label class="error_mensaje" [class.visible]="nombreValido" >El usuario debe tener 6 digitos</ion-label>
-      </ion-card-content>
-    </ion-card>
-  </ion-item>
-    <ion-item lines="full">
-      <ion-card>
+  <div class="datos">
+    <div class="user">
+      <ion-card class="card1">
         <ion-card-content>
-          <ion-input id="clave" (input)="play()" type="password" [(ngModel)]="clave" minlength="4" maxlength="4">Contraseña:</ion-input>
-          <ion-label class="error_mensaje" [class.visible]="claveValida">La contraseña debe poseer 4 digitos</ion-label>
+          <ion-input id="nombre" (input)="play2()" [(ngModel)]="nombre" minlength="6" maxlength="6">Usuario:</ion-input>
+          <ion-label class="error_mensaje" [class.visible]="nombreValido" >El usuario debe tener 6 digitos</ion-label>
         </ion-card-content>
       </ion-card>
-    </ion-item>
-    <ion-item>
+    </div>
+      <div class="clave">
+        <ion-card class="card2">
+          <ion-card-content>
+            <ion-input id="clave" (input)="play()" type="password" [(ngModel)]="clave" minlength="4" maxlength="4">Contraseña:</ion-input>
+            <ion-label class="error_mensaje" [class.visible]="claveValida">La contraseña debe poseer 4 digitos</ion-label>
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </div>
+    <div class="opciones">
       <ion-button (click)="login()">Ingresar</ion-button>
-      <ion-button (click)="registrar()" color="danger">Registrar</ion-button>
-    </ion-item>
-    <ion-item>
-      <ion-button (click)="recuperar()"color="warning">Recuperar Contraseña</ion-button>
-    </ion-item>
+      <p>¿No tienes cuenta aún? registrate<a class="opcional" type="button"(click)="registrar()" color="danger"> Aquí</a></p>
+    </div>
+    <div class="recuperar_clave">
+      <p>¿Olvidaste tu contraseña? puedes cambiarla haciendo click <a class="opcional2" (click)="recuperar()"color="warning">Aquí</a></p>
+    </div>
 </ion-content>

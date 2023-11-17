@@ -2,3 +2,63 @@
     color: red;
     display: none;
 }
+
+.custom-background{
+    --ion-background-color: #80DAEB;
+}
+
+.titulo{
+    border-radius: 20px;
+    border-color: #fff;
+    border-style: solid;
+}
+
+.register{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+
+.cDatos{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center ;
+    align-items: center;
+
+    .cardNombre{
+        background-color: #fff;
+        color: #000;
+        width: 30vh;
+    }
+
+    .carrera{
+        color: #000;
+    }
+
+    .cardApellido{
+        background-color: #fff;
+        color: #000;
+        width: 30vh;
+    }
+    
+    .cardRut{
+        background-color: #fff;
+        color: #000;
+        width: 30vh;
+    }
+
+    .cardEdu{
+        background-color: #fff;
+        color: #000;
+        width: 30vh;
+    }
+}
+
+.registrar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}

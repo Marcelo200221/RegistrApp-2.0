@@ -4,7 +4,7 @@
   position: absolute;
   left: 0;
   right: 0;
-  top: 50%;
+  top: 70%;
   transform: translateY(-50%);
 }
 
@@ -25,3 +25,49 @@
 #container a {
   text-decoration: none;
 }
+
+.body{
+  background-color: greenyellow;
+}
+
+.bienvenida{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  border-style: solid;
+  border-radius: 20px;
+  border-color: #000;
+}
+
+.mensajes{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  //height: 100vh;
+  width: 40vh;
+  border-radius: 20px;
+  border-style: solid;
+  border-color: #fff;
+}
+
+.saludo{
+  display: block;
+  text-align: center;
+}
+
+.descripcion{
+  text-align: center;
+}
+
+.saludo2{
+  display:flex;
+  justify-content: flex-start;
+}
+
+.custom-background{
+  --ion-background-color: #80DAEB;
+}
+
