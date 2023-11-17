@@ -9,3 +9,9 @@ Plugins:
 @capacitor-community/barcode-scanner
 @capacitor/geolocation
 @ionic/storage-angular
+
+Al momento de iniciar:
+
+-Ejecutar comando: npm update (Esto instalará la carpeta node_modules)
+-Luego: ionic serve (para que se instale .angular)
+-Si es necesario ejecutar en Windows PowerShell: Set-ExecutionPoilicy Unrestricted 
