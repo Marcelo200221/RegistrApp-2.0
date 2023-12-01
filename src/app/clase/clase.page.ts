@@ -60,23 +60,18 @@ export class ClasePage implements OnInit {
           this.navCtrl.navigateForward('/daccess');
         }
         
-        let registroProfe = localStorage.getItem('Profesor');
-        let registroRecup = localStorage.getItem('Nuevo usuario');
+        let registroProfe = await this.storage.getvalue('Datos Qr');
+        let registroRecup = await this.storage.getvalue('Nuevo usuario');
 
         if(registroProfe){
           try{
-            this.registroProfeParseado = JSON.parse(registroProfe);
+            this.registroProfeParseado = registroProfe;
+            this.Profe = this.registroProfeParseado[0];
+            this.hora = this.registroProfeParseado[1];
+            this.sala = this.registroProfeParseado[2];
+            this.dia = this.registroProfeParseado[3];
 
-            if(Array.isArray(this.registroProfeParseado)){
-              console.log('Es un arreglo: ', this.registroProfeParseado);
-              this.Profe = this.registroProfeParseado[0];
-              this.hora = this.registroProfeParseado[1];
-              this.sala = this.registroProfeParseado[2];
-              this.dia = this.registroProfeParseado[3];
-            }else{
-              console.log('No es un arreglo JSON válido:', this.registroProfeParseado);
-              
-            }
+            
           } catch(error){
             console.error('Error al analizar el valor del LocalStorage:', error);
           }
@@ -86,18 +81,12 @@ export class ClasePage implements OnInit {
         if (registroRecup) {
           try {
             // Intenta analizar el valor como un arreglo JSON
-            this.registroRecupParseado = JSON.parse(registroRecup);
             
-            if (Array.isArray(this.registroRecupParseado)) {
-              // Verifica que el resultado es un arreglo
-              console.log('Es un arreglo:', this.registroRecupParseado);
-              this.nombre = this.registroRecupParseado[0];
-              this.apellido = this.registroRecupParseado[1];
-              this.rut = this.registroRecupParseado[2];
-              console.log(this.nombre);
-            } else {
-              console.log('No es un arreglo JSON válido:', this.registroRecupParseado);
-            }
+            
+              this.nombre = registroRecup.nombre;
+              this.apellido = registroRecup.apellido;
+              this.rut = registroRecup.Rut;
+      
           } catch (error) {
             console.error('Error al analizar el valor del LocalStorage:', error);
           }
@@ -122,7 +111,6 @@ export class ClasePage implements OnInit {
    
   
     // La imagen se ha capturado exitosamente y puedes hacer algo con ella aquí
-    console.log('Imagen capturada:', image.dataUrl);
   }
 
   ngAfterViewInit() {

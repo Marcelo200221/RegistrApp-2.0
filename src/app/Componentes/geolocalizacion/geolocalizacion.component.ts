@@ -22,7 +22,6 @@ export class GeolocalizacionComponent  implements OnInit {
     const coordinates = await Geolocation.getCurrentPosition();
     this.coordenadas = coordinates;
   
-    console.log('Current position:', this.coordenadas);
   };
 
 }

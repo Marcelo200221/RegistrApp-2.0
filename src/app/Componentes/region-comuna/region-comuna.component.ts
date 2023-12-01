@@ -37,7 +37,7 @@ export class RegionComunaComponent  implements OnInit {
     this.datosRegionalesService.obtenerComunasPorRegion(regionSeleccionada).subscribe(
       (data) => {
         this.comunas = data.data; 
-        console.log(this.comunas);
+        
       },
       (error) => {
         console.error('Error al obtener las comunas: ', error);
@@ -47,7 +47,7 @@ export class RegionComunaComponent  implements OnInit {
 
   guardarInfo(event: any) {
     const regionSeleccionada = this.regionSeleccionada;
-    console.log(regionSeleccionada);
+    
     
     
     
@@ -65,7 +65,6 @@ export class RegionComunaComponent  implements OnInit {
     this.datosRegionalesService.obtenerDatosRegionales().subscribe(
       (data) => {
         this.regiones = data.data;
-        console.log(this.regiones);
         
       },
       (error) =>{

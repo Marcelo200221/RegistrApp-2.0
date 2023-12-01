@@ -2,6 +2,7 @@ import { Block } from '@angular/compiler';
 import { ViewChild } from '@angular/core';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { AlertController, IonInput, NavController } from '@ionic/angular';
+import { StorageService } from '../Servicios/storage.service';
 
 @Component({
   selector: 'app-cambio-clave',
@@ -17,28 +18,13 @@ export class CambioClavePage implements OnInit {
   ClaveNueva: string="";
   cambioSi: boolean=false;
   isVisible: boolean=true;
-  constructor(private alertController: AlertController, private cdr: ChangeDetectorRef, private navCtrl: NavController) { }
+  constructor(private storage: StorageService,private alertController: AlertController, private cdr: ChangeDetectorRef, private navCtrl: NavController) { }
 
   ngOnInit() {
-    let registroRecup = localStorage.getItem('Nuevo usuario');
+    let registroRecup = this.storage.getvalue('Nuevo usuario');
+    this.registroRecupParseado = registroRecup;
 
-
-    if (registroRecup) {
-      try {
-        // Intenta analizar el valor como un arreglo JSON
-        this.registroRecupParseado = JSON.parse(registroRecup);
-        
-        if (Array.isArray(this.registroRecupParseado)) {
-          // Verifica que el resultado es un arreglo
-          console.log('Es un arreglo:', this.registroRecupParseado);
-        } else {
-          console.log('No es un arreglo JSON válido:', this.registroRecupParseado);
-        }
-      } catch (error) {
-        console.error('Error al analizar el valor del LocalStorage:', error);
-      }
-    }
-}
+  }
 
   ionViewDidEnter() {
     this.isVisible = false;
@@ -50,14 +36,13 @@ export class CambioClavePage implements OnInit {
     if(this.Usuario == this.registroRecupParseado[4]){
         const alert = await this.alertController.create({
           header: "Hola " + this.Usuario,
-          message: "Su contraseña anterior es: " + this.registroRecupParseado[5] + " , deseas cambiarla?",
+          message: "Su contraseña anterior es: " + this.registroRecupParseado.Clave + " , deseas cambiarla?",
           buttons: [{
             text: "Sí",
             handler: () => {
               // Acción a realizar cuando se presiona "Sí"
               this.nuevaContraseña.disabled = false;
               this.isVisible = true;
-              console.log("Botón 'Sí' presionado");
               // Agrega aquí la lógica para cambiar la contraseña
             },
           },
@@ -67,7 +52,6 @@ export class CambioClavePage implements OnInit {
             handler: () => {
               // Acción a realizar cuando se presiona "No" o se cierra el cuadro de diálogo
               this.navCtrl.navigateForward('/login')
-              console.log("Botón 'No' presionado o cuadro de diálogo cerrado");
             },
           },],
         })
@@ -76,9 +60,9 @@ export class CambioClavePage implements OnInit {
   }
 
   async cambiarContra(){
-    if(this.registroRecupParseado[5] != this.ClaveNueva){
-      this.registroRecupParseado[5] = this.ClaveNueva;
-      localStorage.setItem('Nuevo usuario', JSON.stringify(this.registroRecupParseado));
+    if(this.registroRecupParseado.Clave != this.ClaveNueva){
+      this.registroRecupParseado.Clave = this.ClaveNueva;
+      this.storage.setvalue('Nuevo usuario', JSON.stringify(this.registroRecupParseado));
 
       const alert = await this.alertController.create({
         header: "Cambio exitoso",
@@ -104,6 +88,14 @@ export class CambioClavePage implements OnInit {
     }
     
 
+  }
+
+  cancelar(){
+    this.navCtrl.navigateBack('/login');
+  }
+
+  volver(){
+    this.navCtrl.navigateBack('/login');
   }
 
 }
