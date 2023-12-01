@@ -61,7 +61,7 @@ export class RegisterPage implements OnInit {
       })
       await alert.present();
       registro.push(this.nombre, this.apellido, this.rut, this.carrera, this.usuario, this.clave)
-      const usuario = {nombre: this.nombre + ' ' + this.apellido, Rut: this.rut, Carrera: this.carrera, Nombre_Usuario: this.usuario, Clave: this.clave, Region: this.regionSeleccionada, Comuna: this.comunaSeleccionada } 
+      const usuario = {nombre: this.nombre, apellido: this.apellido, Rut: this.rut, Carrera: this.carrera, Nombre_Usuario: this.usuario, Clave: this.clave, Region: this.regionSeleccionada, Comuna: this.comunaSeleccionada } 
       let registroJSON = JSON.stringify(registro);
       this.storage.setvalue('Nuevo usuario', usuario);
       localStorage.setItem('Nuevo usuario', registroJSON);

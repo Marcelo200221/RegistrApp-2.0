@@ -41,11 +41,8 @@ export class LoginPage implements OnInit {
       const datosUsuario = await this.storage.getvalue('Sesion de usuario');
       const datosConfUsuario = await this.storage.getvalue('Nuevo usuario');
       const usuarioConf = {username: datosConfUsuario.Nombre_Usuario, clave: datosConfUsuario.Clave}
-      console.log(datosConfUsuario);
-      console.log(datosConfUsuario.Nombre_Usuario);
       
       
-      console.log(usuarioConf);
       
 
       if(datosUsuario && (datosUsuario.Usuario == datosConfUsuario.Nombre_Usuario && datosUsuario.Contraseña == datosConfUsuario.Clave)){
@@ -81,9 +78,9 @@ export class LoginPage implements OnInit {
           
           if (Array.isArray(this.registroRecupParseado)) {
             // Verifica que el resultado es un arreglo
-            console.log('Es un arreglo:', this.registroRecupParseado);
+            
           } else {
-            console.log('No es un arreglo JSON válido:', this.registroRecupParseado);
+           
           }
         } catch (error) {
           console.error('Error al analizar el valor del LocalStorage:', error);
@@ -105,9 +102,9 @@ export class LoginPage implements OnInit {
           
           if (Array.isArray(this.registroRecupParseado)) {
             // Verifica que el resultado es un arreglo
-            console.log('Es un arreglo:', this.registroRecupParseado);
+            
           } else {
-            console.log('No es un arreglo JSON válido:', this.registroRecupParseado);
+            
           }
         } catch (error) {
           console.error('Error al analizar el valor del LocalStorage:', error);
@@ -205,7 +202,6 @@ export class LoginPage implements OnInit {
   }
   
   async login(){
-    
     if(this.registroRecupParseado){
       if(this.nombre != this.registroRecupParseado[4] || this.clave != this.registroRecupParseado[5]){
         const alert = await this.alertController.create({

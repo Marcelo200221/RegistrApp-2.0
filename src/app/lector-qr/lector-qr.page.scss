@@ -6,3 +6,25 @@
   top: 60%;
   transform: translateY(-50%);
 }
+
+.custom-background{
+  --ion-background-color: #80DAEB;
+}
+
+.volver{
+  display: flex;
+  justify-content: left;
+  
+
+
+}
+
+.qr{
+  display: flex;
+  justify-content: center;
+
+  .escaner{
+    color: aquamarine;
+    margin-top: 70%;
+  }
+}

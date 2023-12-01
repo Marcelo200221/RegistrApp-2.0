@@ -4,43 +4,51 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content class="ion-padding custom-background" [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">cambioClave</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <ion-item>
+  <div class="volver">
+    <ion-button class="boton-volver" (click)="volver()">Volver</ion-button>
+  </div>
+
+  <div class="titulo">
     <ion-title>
       Ingresa tu usuario
     </ion-title>
-  </ion-item>
-  <ion-item>
-    <ion-card>
+  </div>
+  <div class="user">
+    <ion-card class="card-user">
       <ion-card-content>
         <ion-input [(ngModel)]="Usuario" maxlength="6">Usuario</ion-input>
       </ion-card-content>
     </ion-card>
-  </ion-item>
+  </div>
 
-  <ion-item>
+  <div class="confirmar">
     <ion-button  (click)="usuarioReconocido()">
       Confirmar
     </ion-button>
-  </ion-item>
+  </div>
 
-  <ion-item class="nuevaContra" [style.display]="isVisible ? 'block' : 'none'">
-    <ion-card >
+  <div class="nuevaContra" [style.display]="isVisible ? 'block' : 'none'">
+    <ion-card class="nueva-contra">
       <ion-card-content>
         <ion-input [(ngModel)]="ClaveNueva" #nuevaContraseña type="password" maxlength="4">Nueva contraseña</ion-input>
       </ion-card-content>
     </ion-card>
-  </ion-item>
+  </div>
 
-  <ion-item [style.display]="isVisible ? 'block' : 'none'">
+  <div class="cambiar" [style.display]="isVisible ? 'block' : 'none'">
     <ion-button (click)="cambiarContra()">
       Cambiar
     </ion-button>
-  </ion-item>
+
+    <ion-button (click)="cancelar()" color="danger">
+      Cancelar
+    </ion-button>
+  </div>
 </ion-content>

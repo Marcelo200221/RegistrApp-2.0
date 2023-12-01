@@ -1,0 +1,41 @@
+.custom-background{
+    --ion-background-color: #80DAEB;
+}
+
+.user{
+    .card-user{
+        background: #fff;
+        color: #000;
+    }
+}
+
+.titulo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    border-radius: 20px;
+    border-style: solid;
+    border-color: #000;
+}
+
+.confirmar{
+    display: flex;
+    justify-content: center;
+}
+
+.nuevaContra{
+
+    .nueva-contra{
+        background: #fff;
+        color: #000;
+    }
+}
+
+.cambiar{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}

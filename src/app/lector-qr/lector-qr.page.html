@@ -4,23 +4,35 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content class="ion-padding custom-background" [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">Ingresa a tu clase</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <ion-item>
-    <ion-button (click)="volver()">Volver</ion-button>
-  </ion-item>
+  <div class="volver">
+    <ion-button class="boton-volver" (click)="volver()">Volver</ion-button>
+  </div>
 
-  <ion-content class="qr">
-    <div id="container" class="ion-padding">
-      <ion-button expand="full" (click)="scanQRCode()">Escanea el codigo de tu clase</ion-button>
-      <div id="videoContainer" [ngClass]="{ 'hide-result': isScanning }">
-        <video #videoElement autoplay="true"></video>
-      </div>
-    </div>
-  </ion-content>
+  <div class="qr">
+    <ion-button class="escaner" expand="full" color="danger" (click)="startScan()">
+        <ion-icon slot="start" name="qr"></ion-icon>
+        Iniciar Escaneo
+    </ion-button>
+  
+    <video #video [hidden]="!scanActive" width="100%"></video>
+    <canvas #canvas hidden></canvas>
+  
+    <ion-button expand="full" (click)="stopScan()" color="danger" *ngIf="scanActive">
+        <ion-icon slot="start" name="close"></ion-icon>
+        Detener escaneo
+    </ion-button>
+  
+    <ion-card *ngIf="qrResult">
+        <ion-card-header>
+            <ion-card-title>Se a escaneado correctamente</ion-card-title>
+        </ion-card-header>
+    </ion-card>
+  </div>
 </ion-content>
